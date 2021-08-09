@@ -6,15 +6,15 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/">
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pannable="true" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
    <content>
-      <VBox prefHeight="200.0" prefWidth="598.0">
+      <VBox prefHeight="200.0" prefWidth="400.0">
          <children>
             <MenuBar>
               <menus>
                 <Menu mnemonicParsing="false" text="Main">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Register Appointment" />
+                        <MenuItem fx:id="menuItemMain" mnemonicParsing="false" onAction="#onMenuItemMain" text="Register Appointment" />
                      </items>
                 </Menu>
               </menus>
