@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="381.0" prefWidth="528.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<VBox prefHeight="381.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AppointmentsController">
    <children>
       <Label text="Appointments">
          <font>
@@ -23,19 +22,19 @@
       </Label>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button mnemonicParsing="false" text="Register event" />
+          <Button fx:id="btRegister" mnemonicParsing="false" onAction="#onBtRegisterAction" text="Register event" />
             <ButtonBar prefHeight="40.0" prefWidth="80.0">
               <buttons>
-                <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="225.0" text="Search" />
+                <Button fx:id="btSearch" mnemonicParsing="false" onAction="#onBtSearchAction" prefHeight="23.0" prefWidth="225.0" text="Search" />
               </buttons>
             </ButtonBar>
         </items>
       </ToolBar>
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableViewAppointment" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Date" />
-          <TableColumn prefWidth="294.0" text="Description" />
-            <TableColumn maxWidth="250.0" prefWidth="158.0" text="Place" />
+          <TableColumn fx:id="tableColumnDate" prefWidth="75.0" text="Date" />
+          <TableColumn fx:id="tableColumnDescription" prefWidth="294.0" text="Description" />
+            <TableColumn fx:id="tableColumnPlace" maxWidth="250.0" prefWidth="158.0" text="Place" />
         </columns>
       </TableView>
    </children>

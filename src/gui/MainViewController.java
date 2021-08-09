@@ -70,7 +70,8 @@ public class MainViewController implements Initializable {
 																	// VBOx About e o painel acima
 
 		} catch (IOException e) {
-			Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
+			//Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
+			e.printStackTrace();
 		}
 	}
 }
