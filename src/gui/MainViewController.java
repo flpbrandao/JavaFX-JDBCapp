@@ -21,7 +21,7 @@ public class MainViewController implements Initializable {
 	private MenuItem menuItemMain;
 
 	public void onMenuItemMain() {
-		System.out.println("Main menu");
+		loadView("/gui/Appointments.fxml");
 	}
 
 	@FXML
