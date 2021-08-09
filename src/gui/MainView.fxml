@@ -17,6 +17,11 @@
                         <MenuItem fx:id="menuItemMain" mnemonicParsing="false" onAction="#onMenuItemMain" text="Register Appointment" />
                      </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="About">
+                    <items>
+                        <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#onMenuItemAbout" text="This software..." />
+                    </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </children>
