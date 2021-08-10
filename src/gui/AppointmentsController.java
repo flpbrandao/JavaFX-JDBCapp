@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -9,14 +10,22 @@ import java.util.ResourceBundle;
 
 import application.Main;
 import db.DB;
+import gui.util.Alerts;
+import gui.util.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Appointment;
 import model.services.PopulateFields;
@@ -42,8 +51,9 @@ public class AppointmentsController implements Initializable {
 	private Button btSearch;
 
 	@FXML
-	private void onBtRegisterAction() {
-		System.out.println("Button register");
+	private void onBtRegisterAction(ActionEvent event) {
+		Stage parentStage = Utils.currentStage(event);
+		createDialogForm("/gui/AppointmentForm.fxml", parentStage);
 	}
 
 	@FXML
@@ -68,6 +78,25 @@ public class AppointmentsController implements Initializable {
 	private void initializeDB() {
 		Connection conn = DB.getConnection();
 		DB.closeConnection();
+	}
+	
+	private void createDialogForm(String absoluteName, Stage parentStage) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			Pane pane = loader.load();
+			
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Appointment manager");
+			dialogStage.setScene(new Scene(pane));
+			dialogStage.initOwner(parentStage);
+			dialogStage.setResizable(false);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.showAndWait();
+			
+		}
+		catch (IOException e) {
+			Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
+		}
 	}
 
 	private void initializeNodes() {

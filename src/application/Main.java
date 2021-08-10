@@ -21,6 +21,7 @@ public class Main extends Application {
 	mainScene = new Scene(parent);
 	primaryStage.setScene(mainScene);
 	primaryStage.setTitle("My appointments");
+	primaryStage.setResizable(false);
 	primaryStage.show();
 	} catch (IOException e) {
 	e.printStackTrace();
