@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import application.Main;
 import db.DB;
 import gui.util.Alerts;
+import gui.util.Constraints;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -103,7 +104,7 @@ public class AppointmentsController implements Initializable {
 		
 		initializeDB();
 		popFields(); //Added function to populate tableView on form initialization - worked
-
+		
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
 		tableColumnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tableColumnPlace.setCellValueFactory(new PropertyValueFactory<>("Place"));
