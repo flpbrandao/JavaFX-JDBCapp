@@ -1,10 +1,14 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.entities.Appointment;
+import model.services.PopulateFields;
 
 public class AppointmentsController implements Initializable {
 
@@ -47,9 +52,12 @@ public class AppointmentsController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
+		System.out.println("Init");
 	}
 
 	private void initializeNodes() {
+		
+		this.popFields(); //Added function to populate tableView on form initialization - worked
 
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
 		tableColumnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
@@ -57,6 +65,17 @@ public class AppointmentsController implements Initializable {
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewAppointment.prefHeightProperty().bind(stage.heightProperty());
+
 	}
+
+	private void popFields() { //Section made by my own
+		PopulateFields popTable = new PopulateFields();
+		List<Appointment> listAppointments = new ArrayList<>();
+		listAppointments = popTable.populateTableViewList();
+		obsList = FXCollections.observableArrayList(listAppointments);
+		tableViewAppointment.setItems(obsList);
+	}
+
+	private ObservableList<Appointment> obsList;
 
 }
