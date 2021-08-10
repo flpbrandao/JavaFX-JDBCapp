@@ -31,7 +31,7 @@ public class AppointmentsController implements Initializable {
 	private TableColumn<Appointment, Date> tableColumnDate;
 
 	@FXML
-	private TableColumn<Appointment, Date> tableColumnPlace;
+	private TableColumn<Appointment, String> tableColumnPlace;
 
 	@FXML
 	private Button btRegister;
