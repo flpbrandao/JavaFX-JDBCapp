@@ -29,6 +29,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	@Override
 	public List<Appointment> searchall() {
+		
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -53,7 +54,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 			throw new DBException(e.getMessage());
 		}
 		
-		return null;
+		return appList;
 	}
 
 }
