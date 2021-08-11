@@ -61,7 +61,7 @@ public class AppointmentsController implements Initializable {
 	private void onBtSearchAction() {
 		System.out.println("Button search");
 	}
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		initializeNodes();
