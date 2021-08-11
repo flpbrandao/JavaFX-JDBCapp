@@ -12,12 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.dao.impl.AppointmentDaoJDBC;
 
-public class AppointmentFromController implements Initializable {
+public class AppointmentFormController implements Initializable {
 
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	AppointmentDaoJDBC a1 = new AppointmentDaoJDBC();
-
-	;
 
 	@FXML
 	private Button btSubmit;
@@ -39,7 +37,7 @@ public class AppointmentFromController implements Initializable {
 
 	@FXML
 	public void onBtSubmitAction() {
-a1.searchall();
+		
 	}
 
 	@FXML

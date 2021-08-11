@@ -3,15 +3,12 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
 import db.DB;
 import gui.util.Alerts;
-import gui.util.Constraints;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,10 +25,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.dao.impl.AppointmentDaoJDBC;
 import model.entities.Appointment;
 import model.services.PopulateFields;
 
 public class AppointmentsController implements Initializable {
+
+	AppointmentDaoJDBC a2 = new AppointmentDaoJDBC();
 
 	@FXML
 	private TableView<Appointment> tableViewAppointment;
@@ -47,13 +47,14 @@ public class AppointmentsController implements Initializable {
 
 	@FXML
 	private Button btRegister;
-	
+
 	@FXML
 	private Button btSearch;
 
 	@FXML
 	private void onBtRegisterAction(ActionEvent event) {
-		Stage parentStage = Utils.currentStage(event); //Função para identificar o stage atual e abrir o form abaixo por cima dele, sem substituir.
+		Stage parentStage = Utils.currentStage(event); // Função para identificar o stage atual e abrir o form abaixo
+														// por cima dele, sem substituir.
 		createDialogForm("/gui/AppointmentForm.fxml", parentStage);
 	}
 
@@ -61,30 +62,14 @@ public class AppointmentsController implements Initializable {
 	private void onBtSearchAction() {
 		System.out.println("Button search");
 	}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
-		initializeNodes();
-		
-	}
+
 	private ObservableList<Appointment> obsList;
-	
-	private void popFields() { //Section made by my own
-		PopulateFields popTable = new PopulateFields();
-		List<Appointment> listAppointments = new ArrayList<>();
-		listAppointments = popTable.populateTableViewList();
-		obsList = FXCollections.observableArrayList(listAppointments);
-		tableViewAppointment.setItems(obsList);
-	}
-	private void initializeDB() {
-		Connection conn = DB.getConnection();
-			}
-	
+
 	private void createDialogForm(String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
-			
+
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Appointment manager");
 			dialogStage.setScene(new Scene(pane));
@@ -92,28 +77,30 @@ public class AppointmentsController implements Initializable {
 			dialogStage.setResizable(false);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
-			
-		}
-		catch (IOException e) {
+
+		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
 		}
 	}
 
-	private void initializeNodes() {
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
 		
-		initializeDB();
-		popFields(); //Added function to populate tableView on form initialization - worked
-		
+		popTableViewFields(); // Added function to populate tableView on form initialization - worked
+
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
 		tableColumnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tableColumnPlace.setCellValueFactory(new PropertyValueFactory<>("Place"));
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewAppointment.prefHeightProperty().bind(stage.heightProperty());
-		
+
 	}
 
+	private void popTableViewFields() { // Section made by my own
+		obsList = FXCollections.observableArrayList(a2.searchall());
+		tableViewAppointment.setItems(obsList);
+	}
 
-	
 
 }
