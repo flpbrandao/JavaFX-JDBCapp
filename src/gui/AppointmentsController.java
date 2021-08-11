@@ -53,7 +53,7 @@ public class AppointmentsController implements Initializable {
 
 	@FXML
 	private void onBtRegisterAction(ActionEvent event) {
-		Stage parentStage = Utils.currentStage(event);
+		Stage parentStage = Utils.currentStage(event); //Função para identificar o stage atual e abrir o form abaixo por cima dele, sem substituir.
 		createDialogForm("/gui/AppointmentForm.fxml", parentStage);
 	}
 
@@ -78,8 +78,7 @@ public class AppointmentsController implements Initializable {
 	}
 	private void initializeDB() {
 		Connection conn = DB.getConnection();
-		DB.closeConnection();
-	}
+			}
 	
 	private void createDialogForm(String absoluteName, Stage parentStage) {
 		try {
@@ -111,7 +110,7 @@ public class AppointmentsController implements Initializable {
 
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewAppointment.prefHeightProperty().bind(stage.heightProperty());
-
+		
 	}
 
 

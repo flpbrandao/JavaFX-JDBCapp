@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
+import db.DB;
 import gui.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +35,7 @@ public class MainViewController implements Initializable {
 
 	@Override
 	public void initialize(URL uri, ResourceBundle rg) {
-
+		DB.getConnection();
 	}
 
 	private synchronized void loadView(String absoluteName) { // Método recebendo a string com o caminho do FXML
@@ -53,7 +54,8 @@ public class MainViewController implements Initializable {
 			Scene mainScene = Main.getMainScene(); // Pega a scene principal criada na classe principal para que seja
 													// exibido na mesma tela. Esse método estático precisa ser criado.
 													// Se der erro dizendo que a main scene está vazia, é porque não foi
-													// atribuída a varíavel mainscene criada à criação da tela. mainScene = new Scene(parent);
+													// atribuída a varíavel mainscene criada à criação da tela.
+													// mainScene = new Scene(parent);
 
 			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); // Pega o vbox principal (já
 																					// existente) dentro do
@@ -70,7 +72,7 @@ public class MainViewController implements Initializable {
 																	// VBOx About e o painel acima
 
 		} catch (IOException e) {
-			//Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
 			e.printStackTrace();
 		}
 	}

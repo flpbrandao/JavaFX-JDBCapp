@@ -14,7 +14,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Main">
                      <items>
-                        <MenuItem fx:id="menuItemMain" mnemonicParsing="false" onAction="#onMenuItemMain" text="Register Appointment" />
+                        <MenuItem fx:id="menuItemMain" mnemonicParsing="false" onAction="#onMenuItemMain" text="My appointments..." />
                      </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="About">

@@ -13,6 +13,7 @@ public class Appointment implements Serializable {
 	private Date date;
 	private String Description;
 	private String place;
+	private String active;
 	
 	public Appointment () {
 		
@@ -48,7 +49,10 @@ public class Appointment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Appointment [date=" + sdf.format(date) + ", Description=" + Description + "]";
+		return "Appointment [date=" + date + ", Description=" + Description + ", place=" + place + ", active=" + active
+				+ "]";
 	}
+
+
 
 }
