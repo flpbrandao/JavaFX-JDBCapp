@@ -17,7 +17,7 @@ import model.entities.Appointment;
 public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	private List<Appointment> appList = new ArrayList<>();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //This is MYSQL date format
 
 	@Override
 	public void addToBD(Appointment app) {
@@ -61,7 +61,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 			conn = DB.getConnection();
 			st = conn.createStatement();
-			rs = st.executeQuery("SELECT * FROM mysql_appointments.appointments ORDER BY Date");
+			rs = st.executeQuery("SELECT * FROM mysql_appointments.appointments WHERE Active = 0 ORDER BY Date");
 			while (rs.next()) {
 
 				Date date = (rs.getDate("Date"));
