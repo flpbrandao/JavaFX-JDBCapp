@@ -2,12 +2,11 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
+
 import java.util.Date;
 import java.util.ResourceBundle;
 
 import application.Main;
-import db.DB;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -27,12 +26,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.dao.impl.AppointmentDaoJDBC;
 import model.entities.Appointment;
-import model.services.PopulateFields;
+
 
 public class AppointmentsController implements Initializable {
 
 	AppointmentDaoJDBC a2 = new AppointmentDaoJDBC();
-
+	private ObservableList<Appointment> obsList;
+	
+	
 	@FXML
 	private TableView<Appointment> tableViewAppointment;
 
@@ -62,8 +63,6 @@ public class AppointmentsController implements Initializable {
 	private void onBtSearchAction() {
 		System.out.println("Button search");
 	}
-
-	private ObservableList<Appointment> obsList;
 
 	private void createDialogForm(String absoluteName, Stage parentStage) {
 		try {

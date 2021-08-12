@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.dao.impl.AppointmentDaoJDBC;
+import model.entities.Appointment;
 
 public class AppointmentFormController implements Initializable {
 
@@ -36,8 +38,12 @@ public class AppointmentFormController implements Initializable {
 	private TextField txtPlace;
 
 	@FXML
-	public void onBtSubmitAction() {
+	public void onBtSubmitAction() throws ParseException {
 		
+		Appointment b1 = new Appointment(sdf.parse(txtDate.getText()), txtDescription.getText(), txtPlace.getText());
+		AppointmentDaoJDBC dao1 = new AppointmentDaoJDBC();
+		dao1.addToBD(b1);
+		onBtCleanAction();
 	}
 
 	@FXML

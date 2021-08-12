@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Appointment implements Serializable {
 	
-	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	private static final long serialVersionUID = 1L;
 	
@@ -26,7 +26,7 @@ public class Appointment implements Serializable {
 	}
 
 	public Date getDate() {
-		return date;
+		return (date);
 	}
 
 	public void setDate(Date date) {
