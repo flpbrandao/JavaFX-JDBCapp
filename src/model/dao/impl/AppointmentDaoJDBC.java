@@ -17,19 +17,23 @@ import model.entities.Appointment;
 public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	private List<Appointment> appList = new ArrayList<>();
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Override
 	public void addToBD(Appointment app) {
 		Connection conn = null;
 		PreparedStatement st = null;
 		try {
-			System.out.println(app.getDate());
-			conn = DB.getConnection();
-			st = conn.prepareStatement("INSERT INTO mysql_appointments.appointments (Date, Description, Place, Active) VALUES (?,?,?,?)");
 
-			st.setDate(1, new java.sql.Date(app.getDate().getTime())); // O método getTime retorna, em long
-																		// (milissegundos desde 1970), a data do objeto
+			String datestring = sdf.format(app.getDate()); // Gambiarra inserindo a data como string manipulado pelo SDF
+															// no campo Date do MySQL
+
+			conn = DB.getConnection();
+			st = conn.prepareStatement(
+					"INSERT INTO mysql_appointments.appointments (Date, Description, Place, Active) VALUES (?,?,?,?)");
+
+			st.setString(1, datestring); // O método getTime retorna, em long
+											// (milissegundos desde 1970), a data do objeto
 			st.setString(2, app.getDescription());
 			st.setString(3, app.getPlace());
 			st.setInt(4, 1);
@@ -65,7 +69,6 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 				String place = (rs.getString("Place"));
 				Appointment app = new Appointment(date, description, place);
 				appList.add(app);
-				
 
 			}
 
