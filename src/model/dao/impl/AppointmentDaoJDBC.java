@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	private List<Appointment> appList = new ArrayList<>();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //This is MYSQL date format
+	SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	@Override
 	public void addToBD(Appointment app) {
@@ -65,15 +67,17 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 			while (rs.next()) {
 
 				Date date = (rs.getTimestamp("Date"));
-				System.out.println(date);
+				String datestring = sdf2.format(date);
+				System.out.println(datestring);
+				Date date1 = (sdf2.parse(datestring));
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
-				Appointment app = new Appointment(date, description, place);
+				Appointment app = new Appointment(date1, description, place);
 				appList.add(app);
 
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			throw new DBException(e.getMessage());
 		}
 
