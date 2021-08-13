@@ -64,7 +64,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 			rs = st.executeQuery("SELECT * FROM mysql_appointments.appointments WHERE Active = 1 ORDER BY Date");
 			while (rs.next()) {
 
-				Date date = (rs.getDate("Date"));
+				Date date = (rs.getTimestamp("Date"));
 				System.out.println(date);
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
