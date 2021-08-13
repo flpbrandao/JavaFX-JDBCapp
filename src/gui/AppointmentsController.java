@@ -96,7 +96,7 @@ public class AppointmentsController implements Initializable {
 
 	}
 
-	private void popTableViewFields() { // Section made by my own
+	public void popTableViewFields() { // Section made by my own
 		obsList = FXCollections.observableArrayList(a2.searchall());
 		tableViewAppointment.setItems(obsList);
 	}

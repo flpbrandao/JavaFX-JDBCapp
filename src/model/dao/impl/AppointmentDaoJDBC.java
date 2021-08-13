@@ -61,10 +61,11 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 			conn = DB.getConnection();
 			st = conn.createStatement();
-			rs = st.executeQuery("SELECT * FROM mysql_appointments.appointments WHERE Active = 0 ORDER BY Date");
+			rs = st.executeQuery("SELECT * FROM mysql_appointments.appointments WHERE Active = 1 ORDER BY Date");
 			while (rs.next()) {
 
 				Date date = (rs.getDate("Date"));
+				System.out.println(date);
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
 				Appointment app = new Appointment(date, description, place);

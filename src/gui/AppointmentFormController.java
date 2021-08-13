@@ -5,9 +5,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
+import db.DBException;
+import gui.util.Alerts;
 import gui.util.Constraints;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -39,11 +42,26 @@ public class AppointmentFormController implements Initializable {
 
 	@FXML
 	public void onBtSubmitAction() throws ParseException {
-		
-		Appointment b1 = new Appointment(sdf.parse(txtDate.getText()), txtDescription.getText(), txtPlace.getText());
-		AppointmentDaoJDBC dao1 = new AppointmentDaoJDBC();
-		dao1.addToBD(b1);
-		onBtCleanAction();
+
+		if ((txtDescription.getText() == "") || (txtDate.getText() == "")) {
+			Alerts.showAlert("Required fields missing ", null, "Date and description needs to be filled!",
+					AlertType.WARNING);
+		} else {
+			try {
+
+				Appointment b1 = new Appointment(sdf.parse(txtDate.getText()), txtDescription.getText(),
+						txtPlace.getText());
+				AppointmentDaoJDBC dao1 = new AppointmentDaoJDBC();
+				dao1.addToBD(b1);
+				onBtCleanAction();
+				Alerts.showAlert("New entry inserted", null, "New appointment was set!", AlertType.CONFIRMATION);
+			
+			
+			} catch (DBException e) {
+				Alerts.showAlert("Error inserting", null, "An error happened in DAO association", AlertType.ERROR);
+			}
+
+		}
 	}
 
 	@FXML
