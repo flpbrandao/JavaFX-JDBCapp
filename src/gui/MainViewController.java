@@ -38,7 +38,7 @@ public class MainViewController implements Initializable {
 		DB.getConnection();
 	}
 
-	private synchronized void loadView(String absoluteName) { // Método recebendo a string com o caminho do FXML
+	public synchronized void loadView(String absoluteName) { // Método recebendo a string com o caminho do FXML
 		try {
 
 			// Esses códigos manipulam diretamente a cena principal e o vbox principal da

@@ -64,7 +64,7 @@ public class AppointmentsController implements Initializable {
 		System.out.println("Button search");
 	}
 
-	private void createDialogForm(String absoluteName, Stage parentStage) {
+	public void createDialogForm(String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();

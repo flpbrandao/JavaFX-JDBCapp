@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import db.DBException;
 import gui.util.Alerts;
 import gui.util.Constraints;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -41,7 +42,7 @@ public class AppointmentFormController implements Initializable {
 	private TextField txtPlace;
 
 	@FXML
-	public void onBtSubmitAction() throws ParseException {
+	public void onBtSubmitAction(ActionEvent event) throws ParseException {
 
 		if ((txtDescription.getText() == "") || (txtDate.getText() == "")) {
 			Alerts.showAlert("Required fields missing ", null, "Date and description needs to be filled!",
@@ -55,8 +56,7 @@ public class AppointmentFormController implements Initializable {
 				dao1.addToBD(b1);
 				onBtCleanAction();
 				Alerts.showAlert("New entry inserted", null, "New appointment was set!", AlertType.CONFIRMATION);
-			
-			
+
 			} catch (DBException e) {
 				Alerts.showAlert("Error inserting", null, "An error happened in DAO association", AlertType.ERROR);
 			}
@@ -66,10 +66,18 @@ public class AppointmentFormController implements Initializable {
 
 	@FXML
 	public void onBtExitAction() {
+
+		MainViewController mv1 = new MainViewController();
+
 		// IMPORTANTE: Obtendo o stage atual para manipulação a partir de um controle
 		// qualquer:
-		Stage stage = (Stage) btExit.getScene().getWindow();
-		stage.close();
+		Stage stage = (Stage) btExit.getScene().getWindow(); // Captura o stage da janela atual
+
+		stage.close(); // Fecha a scene atual(form modal de cadastrar appointments)
+
+		mv1.loadView("/gui/Appointments.fxml"); // Sendo o stage compartilhado entre a janela modal e a principal,
+												// comando anterior fecha todas e abre principal de n ovo, com dados
+												// atualizados no tablwview
 	}
 
 	@FXML

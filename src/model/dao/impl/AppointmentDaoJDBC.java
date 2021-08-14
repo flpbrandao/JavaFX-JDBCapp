@@ -68,8 +68,8 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 				Date date = (rs.getTimestamp("Date"));
 				String datestring = sdf2.format(date);
-				System.out.println(datestring);
 				Date date1 = (sdf2.parse(datestring));
+				
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
 				Appointment app = new Appointment(date1, description, place);
