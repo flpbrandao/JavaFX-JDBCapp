@@ -19,7 +19,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	private List<Appointment> appList = new ArrayList<>();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //This is MYSQL date format
-	SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
 	@Override
 	public void addToBD(Appointment app) {
@@ -34,8 +34,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 			st = conn.prepareStatement(
 					"INSERT INTO mysql_appointments.appointments (Date, Description, Place, Active) VALUES (?,?,?,?)");
 
-			st.setString(1, datestring); // O método getTime retorna, em long
-											// (milissegundos desde 1970), a data do objeto
+			st.setString(1, datestring); // Setando Date no MySQL por função de setString - Gambiarra
 			st.setString(2, app.getDescription());
 			st.setString(3, app.getPlace());
 			st.setInt(4, 1);
@@ -55,6 +54,8 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	@Override
 	public List<Appointment> searchall() {
+		
+		appList.clear();
 
 		Connection conn = null;
 		Statement st = null;
@@ -82,6 +83,54 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 		}
 
 		return appList;
+		
 	}
-
+	
+	@Override
+	public List<Appointment> searchByDate(Date date)  {
+				
+		appList.clear();
+		
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		Connection conn = null;
+		
+		try {
+			conn = DB.getConnection();
+		
+			
+			System.out.println(date);
+			String dateFormatted = sdf2.format(date);
+			System.out.println(dateFormatted);
+		
+			ps = conn.prepareStatement("SELECT * From appointments WHERE Date = ?");
+			ps.setString(1, sdf2.format(date));
+			rs = ps.executeQuery(); // Para resultSet associado ao PreparedStatement, só pode ser executeQuery e não o executeUpdate.
+		
+			while (rs.next()) {
+				Appointment d1 = new Appointment();
+				date = sdf2.parse(dateFormatted);
+				d1.setDate(date);
+				d1.setDescription(rs.getString("Description"));
+				d1.setPlace(rs.getString("Place"));
+				appList.add(d1);
+				System.out.println(d1);
+				
+			}
+		}
+				
+		catch (SQLException | ParseException e) {
+			throw new DBException (e.getMessage());
+				
+			}
+		return appList;
+	}
 }
+	
+	
+		
+		
+	
+	
+
+

@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
-
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -52,6 +51,8 @@ public class AppointmentsController implements Initializable {
 	@FXML
 	private Button btSearch;
 
+
+
 	@FXML
 	private void onBtRegisterAction(ActionEvent event) {
 		Stage parentStage = Utils.currentStage(event); // Função para identificar o stage atual e abrir o form abaixo
@@ -60,8 +61,10 @@ public class AppointmentsController implements Initializable {
 	}
 
 	@FXML
-	private void onBtSearchAction() {
-		System.out.println("Button search");
+	private void onBtSearchAction(ActionEvent event) {
+		Stage parentStage = Utils.currentStage(event); // Função para identificar o stage atual e abrir o form abaixo
+		// por cima dele, sem substituir
+		createDialogForm("/gui/SearchForm.fxml", parentStage);
 	}
 
 	public void createDialogForm(String absoluteName, Stage parentStage) {
