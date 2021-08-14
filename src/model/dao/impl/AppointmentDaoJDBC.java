@@ -13,6 +13,8 @@ import java.util.List;
 
 import db.DB;
 import db.DBException;
+import gui.util.Alerts;
+import javafx.scene.control.Alert.AlertType;
 import model.entities.Appointment;
 
 public class AppointmentDaoJDBC implements AppointmentDAO {
@@ -97,29 +99,34 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 		
 		try {
 			conn = DB.getConnection();
-		
+				
+			ps = conn.prepareStatement("SELECT * From appointments"); //Ao invés de inserir a data diretamente, é mais simples (mas custa mais) fazer a filtragem na lista total
 			
-			System.out.println(date);
-			String dateFormatted = sdf2.format(date);
-			System.out.println(dateFormatted);
-		
-			ps = conn.prepareStatement("SELECT * From appointments WHERE Date = ?");
-			ps.setString(1, sdf2.format(date));
 			rs = ps.executeQuery(); // Para resultSet associado ao PreparedStatement, só pode ser executeQuery e não o executeUpdate.
 		
-			while (rs.next()) {
+			while (rs.next()) { //Filtrando em todos os registros se a data passada como parametro(form) é a mesma lida pelo BD. Se for, cria o objeto Appointment.
+				
+				Date newDate = new Date();
+				newDate = rs.getDate(1);
+				if (newDate.getTime()==date.getTime()) {
+				
 				Appointment d1 = new Appointment();
-				date = sdf2.parse(dateFormatted);
-				d1.setDate(date);
+				d1.setDate(newDate);
 				d1.setDescription(rs.getString("Description"));
 				d1.setPlace(rs.getString("Place"));
-				appList.add(d1);
 				System.out.println(d1);
+				appList.add(d1);
+				
+				
+				}
+				
+							
 				
 			}
+			Alerts.showAlert("Records found", null, appList.size() + " appointments found on this date.", AlertType.INFORMATION);
 		}
 				
-		catch (SQLException | ParseException e) {
+		catch (SQLException e) {
 			throw new DBException (e.getMessage());
 				
 			}
