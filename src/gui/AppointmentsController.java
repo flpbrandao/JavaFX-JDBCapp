@@ -81,7 +81,8 @@ public class AppointmentsController implements Initializable {
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
-			Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
+			//Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
+			e.printStackTrace();
 		}
 	}
 

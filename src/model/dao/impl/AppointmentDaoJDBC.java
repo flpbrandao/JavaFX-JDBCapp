@@ -20,7 +20,7 @@ import model.entities.Appointment;
 public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	private List<Appointment> appList = new ArrayList<>();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //This is MYSQL date format
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // This is MYSQL date format
 	SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 
 	@Override
@@ -56,7 +56,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 	@Override
 	public List<Appointment> searchall() {
-		
+
 		appList.clear();
 
 		Connection conn = null;
@@ -72,7 +72,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 				Date date = (rs.getTimestamp("Date"));
 				String datestring = sdf2.format(date);
 				Date date1 = (sdf2.parse(datestring));
-				
+
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
 				Appointment app = new Appointment(date1, description, place);
@@ -85,59 +85,53 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 		}
 
 		return appList;
-		
+
 	}
-	
+
 	@Override
-	public List<Appointment> searchByDate(Date date)  {
-				
+	public List<Appointment> searchByDate(Date date) {
+
 		appList.clear();
-		
+
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		Connection conn = null;
-		
+
 		try {
 			conn = DB.getConnection();
-				
-			ps = conn.prepareStatement("SELECT * From appointments"); //Ao invés de inserir a data diretamente, é mais simples (mas custa mais) fazer a filtragem na lista total
-			
-			rs = ps.executeQuery(); // Para resultSet associado ao PreparedStatement, só pode ser executeQuery e não o executeUpdate.
-		
-			while (rs.next()) { //Filtrando em todos os registros se a data passada como parametro(form) é a mesma lida pelo BD. Se for, cria o objeto Appointment.
-				
+
+			ps = conn.prepareStatement("SELECT * From appointments"); // Ao invés de inserir a data diretamente, é mais
+																		// simples (mas custa mais) fazer a filtragem na
+																		// lista total
+
+			rs = ps.executeQuery(); // Para resultSet associado ao PreparedStatement, só pode ser executeQuery e não
+									// o executeUpdate.
+
+			while (rs.next()) { // Filtrando em todos os registros se a data passada como parametro(form) é a
+								// mesma lida pelo BD. Se for, cria o objeto Appointment.
+
 				Date newDate = new Date();
 				newDate = rs.getDate(1);
-				if (newDate.getTime()==date.getTime()) {
-				
-				Appointment d1 = new Appointment();
-				d1.setDate(newDate);
-				d1.setDescription(rs.getString("Description"));
-				d1.setPlace(rs.getString("Place"));
-				System.out.println(d1);
-				appList.add(d1);
-				
-				
+				if (newDate.getTime() == date.getTime()) {
+
+					Appointment d1 = new Appointment();
+					d1.setDate(newDate);
+					d1.setDescription(rs.getString("Description"));
+					d1.setPlace(rs.getString("Place"));
+					System.out.println(d1);
+					appList.add(d1);
+
 				}
-				
-							
-				
+
 			}
-			Alerts.showAlert("Records found", null, appList.size() + " appointments found on this date.", AlertType.INFORMATION);
+			Alerts.showAlert("Records found", null, appList.size() + " appointments found on this date.",
+					AlertType.INFORMATION);
 		}
-				
+
 		catch (SQLException e) {
-			throw new DBException (e.getMessage());
-				
-			}
+			throw new DBException(e.getMessage());
+
+		}
 		return appList;
 	}
 }
-	
-	
-		
-		
-	
-	
-
-
