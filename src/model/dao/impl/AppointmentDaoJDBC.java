@@ -72,10 +72,11 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 				Date date = (rs.getTimestamp("Date"));
 				String datestring = sdf2.format(date);
 				Date date1 = (sdf2.parse(datestring));
-
+				
+				Integer active = rs.getInt(4);
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
-				Appointment app = new Appointment(date1, description, place);
+				Appointment app = new Appointment(date1, description, place, active);
 				appList.add(app);
 
 			}
@@ -118,6 +119,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 					d1.setDate(newDate);
 					d1.setDescription(rs.getString("Description"));
 					d1.setPlace(rs.getString("Place"));
+					d1.setActive(rs.getInt(4));
 					System.out.println(d1);
 					appList.add(d1);
 

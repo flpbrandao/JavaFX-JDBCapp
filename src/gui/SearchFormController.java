@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Checkbox;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,12 +14,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.dao.impl.AppointmentDaoJDBC;
 import model.entities.Appointment;
 
@@ -52,13 +53,16 @@ public class SearchFormController implements Initializable {
 
 	@FXML
 	private TableColumn<Appointment, String> tableColumnPlace;
-	
-	
+
+	@FXML
+	private TableColumn<Appointment, Integer> tableColumnActive;
+
 	@FXML
 	private TextField txtSearch;
 
 	@FXML
 	private void onBtSearchAction() {
+
 		try {
 			Date date = new Date();
 			date = sdf3.parse(txtSearch.getText());
@@ -75,13 +79,20 @@ public class SearchFormController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		Constraints.setTextFieldMaxLength(txtSearch, 10);
-		
+		popTableView();
+
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
 		tableColumnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tableColumnPlace.setCellValueFactory(new PropertyValueFactory<>("Place"));
-		tableColumnPlace.setCellValueFactory(new PropertyValueFactory<>("Action"));
+		tableColumnActive.setCellValueFactory(new PropertyValueFactory<>("Active"));
 	}
 
+	private void popTableView() {
+
+		obsList = FXCollections.observableArrayList(c1.searchall());
+		tbViewSearchAppointments.setItems(obsList);
+        System.out.println(obsList);
+	}
 }
