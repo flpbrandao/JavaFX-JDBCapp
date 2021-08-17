@@ -67,7 +67,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 
 			conn = DB.getConnection();
 			st = conn.createStatement();
-			rs = st.executeQuery("SELECT * FROM mysql_appointments.appointments WHERE Active = 1 ORDER BY Date");
+			rs = st.executeQuery("SELECT * FROM mysql_appointments.appointments WHERE Active = 1 ORDER BY Date DESC");
 			while (rs.next()) {
 
 				Date date = (rs.getTimestamp("Date"));
@@ -92,7 +92,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 	}
 
 	@Override
-	public List<Appointment> searchByDate(Date date) {
+	public List<Appointment> searchByDate(Date date, Boolean onInit) {
 
 		appList.clear();
 
@@ -123,14 +123,17 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 					d1.setPlace(rs.getString("Place"));
 					d1.setActive(rs.getInt(4));
 					d1.setUpdate(new Button("Mark as completed"));
-					System.out.println(d1);
+					
 					appList.add(d1);
 
 				}
 
 			}
-			Alerts.showAlert("Records found", null, appList.size() + " appointments found on this date.",
-					AlertType.INFORMATION);
+			if (onInit==false) {
+				Alerts.showAlert("Records found", null, appList.size() + " appointments found on this date.",
+						AlertType.INFORMATION);
+			}
+			
 		}
 
 		catch (SQLException e) {

@@ -29,15 +29,6 @@ public class SearchFormController implements Initializable {
 	SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
 
 	@FXML
-	private ComboBox<Appointment> cmbApp;
-
-	@FXML
-	private void onCmbAppAction() {
-		cmbApp.setItems(obsList);
-		cmbApp.getSelectionModel().selectFirst();
-	}
-
-	@FXML
 	private Button btSearch;
 
 	@FXML
@@ -65,18 +56,9 @@ public class SearchFormController implements Initializable {
 	@FXML
 	private void onBtSearchAction() {
 
-		try {
-			Date date = new Date();
-			date = sdf3.parse(txtSearch.getText());
-
-			obsList = FXCollections.observableArrayList(c1.searchByDate(date));
-			onCmbAppAction();
-
-		} catch (ParseException e) {
-			Alerts.showAlert("Error in data format!", null, "Please type date in the correct format: DD/MM/YYYY!",
-					AlertType.ERROR);
-			txtSearch.setText(null);
-		}
+		Boolean onInit = false;
+		popTableView(onInit);
+		
 	}
 
 	@Override
@@ -84,7 +66,7 @@ public class SearchFormController implements Initializable {
 
 		Constraints.setTextFieldMaxLength(txtSearch, 10);
 		initializeTableView();
-		popTableView();
+		popTableView(true);
 
 	}
 
@@ -97,12 +79,36 @@ public class SearchFormController implements Initializable {
 
 	}
 
-	private void popTableView() {
-		
-		Date todayDate = new Date();
+	private void popTableView(Boolean onInit) {
+		Date a = null;
+		if (txtSearch.getText() == "") {
 
-		obsList = FXCollections.observableArrayList(c1.searchByDate(todayDate));
+			try {
+
+				a = processTodayDate(new Date());
+			} catch (ParseException e) {
+				Alerts.showAlert("Error parsing date", null, "Verify date format", AlertType.ERROR);
+			}
+
+		} else {
+			try {
+				a = sdf3.parse(txtSearch.getText());
+			} catch (ParseException e) {
+				Alerts.showAlert("Error parsing date", null, "Verify date format", AlertType.ERROR);
+
+			}
+		}
+		obsList = FXCollections.observableArrayList(c1.searchByDate(a, onInit));
 		tbViewSearchAppointments.setItems(obsList);
+	}
+
+	private Date processTodayDate(Date todayDate) throws ParseException {
+		String date = sdf3.format(todayDate); // Recebe a variável Date que pegou dia e horário no momento da
+												// instanciação, e o format do SDF transforma apenas em data
+		Date newDate = sdf3.parse(date); // Ao fazer o parse da String com a data sem horário, cria-se uma nova data com
+											// horário 00:00:00, q vai ser usado para comparar dias iguais
+
+		return newDate;
 
 	}
 

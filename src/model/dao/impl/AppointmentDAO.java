@@ -12,6 +12,6 @@ public interface AppointmentDAO {
 	void updateToBD(Appointment app);
 
 	public List<Appointment> searchall();
-	public List<Appointment> searchByDate(Date date);
+	public List<Appointment> searchByDate(Date date, Boolean onInit);
 
 }

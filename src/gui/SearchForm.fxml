@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -38,11 +37,6 @@
             <Insets left="165.0" top="10.0" />
          </VBox.margin>
       </Button>
-      <ComboBox fx:id="cmbApp" onAction="#onCmbAppAction" prefHeight="25.0" prefWidth="394.0">
-         <VBox.margin>
-            <Insets left="10.0" right="10.0" top="20.0" />
-         </VBox.margin>
-      </ComboBox>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <VBox.margin>
             <Insets top="30.0" />
@@ -50,8 +44,8 @@
          <children>
             <TableView fx:id="tbViewSearchAppointments" layoutY="-8.0" prefHeight="226.0" prefWidth="430.0">
               <columns>
-                <TableColumn fx:id="tableColumnDate" prefWidth="104.0" text="Date" />
-                <TableColumn fx:id="tableColumnDescription" minWidth="0.0" prefWidth="82.0" text="Description" />
+                <TableColumn fx:id="tableColumnDate" prefWidth="79.0" text="Date" />
+                <TableColumn fx:id="tableColumnDescription" minWidth="0.0" prefWidth="107.0" text="Description" />
                   <TableColumn fx:id="tableColumnPlace" minWidth="0.0" prefWidth="72.0" text="Place" />
                   <TableColumn fx:id="tableColumnActive" prefWidth="47.0" text="Active" />
                   <TableColumn fx:id="tableColumnButton" prefWidth="122.0" text="Update" />

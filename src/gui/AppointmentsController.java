@@ -89,6 +89,7 @@ public class AppointmentsController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
+		
 		popTableViewFields(); // Added function to populate tableView on form initialization - worked
 
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
