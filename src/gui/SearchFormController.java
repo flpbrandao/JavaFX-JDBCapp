@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Checkbox;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -58,6 +57,9 @@ public class SearchFormController implements Initializable {
 	private TableColumn<Appointment, Integer> tableColumnActive;
 
 	@FXML
+	private TableColumn<Appointment, Button> tableColumnButton;
+
+	@FXML
 	private TextField txtSearch;
 
 	@FXML
@@ -81,18 +83,27 @@ public class SearchFormController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		Constraints.setTextFieldMaxLength(txtSearch, 10);
+		initializeTableView();
 		popTableView();
 
+	}
+
+	private void initializeTableView() {
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
 		tableColumnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tableColumnPlace.setCellValueFactory(new PropertyValueFactory<>("Place"));
 		tableColumnActive.setCellValueFactory(new PropertyValueFactory<>("Active"));
+		tableColumnButton.setCellValueFactory(new PropertyValueFactory<>("Update"));
+
 	}
 
 	private void popTableView() {
+		
+		Date todayDate = new Date();
 
-		obsList = FXCollections.observableArrayList(c1.searchall());
+		obsList = FXCollections.observableArrayList(c1.searchByDate(todayDate));
 		tbViewSearchAppointments.setItems(obsList);
-        System.out.println(obsList);
+
 	}
+
 }

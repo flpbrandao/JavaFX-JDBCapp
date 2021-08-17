@@ -51,9 +51,10 @@
             <TableView fx:id="tbViewSearchAppointments" layoutY="-8.0" prefHeight="226.0" prefWidth="430.0">
               <columns>
                 <TableColumn fx:id="tableColumnDate" prefWidth="104.0" text="Date" />
-                <TableColumn fx:id="tableColumnDescription" minWidth="0.0" prefWidth="162.0" text="Description" />
-                  <TableColumn fx:id="tableColumnPlace" minWidth="0.0" prefWidth="91.0" text="Place" />
-                  <TableColumn fx:id="tableColumnActive" prefWidth="75.0" text="Active" />
+                <TableColumn fx:id="tableColumnDescription" minWidth="0.0" prefWidth="82.0" text="Description" />
+                  <TableColumn fx:id="tableColumnPlace" minWidth="0.0" prefWidth="72.0" text="Place" />
+                  <TableColumn fx:id="tableColumnActive" prefWidth="47.0" text="Active" />
+                  <TableColumn fx:id="tableColumnButton" prefWidth="122.0" text="Update" />
               </columns>
             </TableView>
          </children>

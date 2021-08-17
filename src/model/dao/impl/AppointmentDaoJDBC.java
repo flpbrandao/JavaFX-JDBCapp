@@ -15,6 +15,7 @@ import db.DB;
 import db.DBException;
 import gui.util.Alerts;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import model.entities.Appointment;
 
 public class AppointmentDaoJDBC implements AppointmentDAO {
@@ -76,7 +77,8 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 				Integer active = rs.getInt(4);
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
-				Appointment app = new Appointment(date1, description, place, active);
+				Button b1 = new Button("Mark as completed");
+				Appointment app = new Appointment(date1, description, place, active, b1);
 				appList.add(app);
 
 			}
@@ -120,6 +122,7 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 					d1.setDescription(rs.getString("Description"));
 					d1.setPlace(rs.getString("Place"));
 					d1.setActive(rs.getInt(4));
+					d1.setUpdate(new Button("Mark as completed"));
 					System.out.println(d1);
 					appList.add(d1);
 

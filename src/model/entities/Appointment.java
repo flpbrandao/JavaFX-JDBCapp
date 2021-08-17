@@ -1,7 +1,11 @@
 package model.entities;
 
+
 import java.io.Serializable;
 import java.util.Date;
+
+import javafx.scene.control.Button;
+
 
 public class Appointment implements Serializable {
 
@@ -11,6 +15,7 @@ public class Appointment implements Serializable {
 	private String Description;
 	private String place;
 	private Integer active;
+	private Button Update;
 
 	public Appointment() {
 
@@ -27,6 +32,14 @@ public class Appointment implements Serializable {
 		Description = description;
 		this.place = place;
 		this.active = active;
+	}
+	
+	public Appointment(Date date, String description, String place, Integer active, Button button) {
+		this.date = date;
+		Description = description;
+		this.place = place;
+		this.active = active;
+		this.setUpdate(button);
 	}
 
 	public Integer getActive() {
@@ -66,5 +79,17 @@ public class Appointment implements Serializable {
 		return "Appointment [date=" + date + ", Description=" + Description + ", place=" + place + ", active=" + active
 				+ "]";
 	}
+
+	public Button getUpdate() {
+		return Update;
+	}
+
+	public void setUpdate(Button update) {
+		Update = update;
+	}
+
+
+
+
 
 }
