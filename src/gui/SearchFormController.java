@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -24,12 +23,15 @@ import model.entities.Appointment;
 
 public class SearchFormController implements Initializable {
 
-	ObservableList<Appointment> obsList;
+	public ObservableList<Appointment> obsList;
 	AppointmentDaoJDBC c1 = new AppointmentDaoJDBC();
 	SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy");
 
 	@FXML
 	private Button btSearch;
+	
+	@FXML
+	private Button btUpdate;
 
 	@FXML
 
@@ -58,6 +60,13 @@ public class SearchFormController implements Initializable {
 
 		Boolean onInit = false;
 		popTableView(onInit);
+		
+	}
+	@FXML
+	private void onBtUpdateAction() {
+
+
+
 		
 	}
 
@@ -100,6 +109,7 @@ public class SearchFormController implements Initializable {
 		}
 		obsList = FXCollections.observableArrayList(c1.searchByDate(a, onInit));
 		tbViewSearchAppointments.setItems(obsList);
+		
 	}
 
 	private Date processTodayDate(Date todayDate) throws ParseException {

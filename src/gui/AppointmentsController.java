@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import application.Main;
-import gui.util.Alerts;
+
 import gui.util.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,13 +26,11 @@ import javafx.stage.Stage;
 import model.dao.impl.AppointmentDaoJDBC;
 import model.entities.Appointment;
 
-
 public class AppointmentsController implements Initializable {
 
 	AppointmentDaoJDBC a2 = new AppointmentDaoJDBC();
 	private ObservableList<Appointment> obsList;
-	
-	
+
 	@FXML
 	private TableView<Appointment> tableViewAppointment;
 
@@ -50,8 +48,6 @@ public class AppointmentsController implements Initializable {
 
 	@FXML
 	private Button btSearch;
-
-
 
 	@FXML
 	private void onBtRegisterAction(ActionEvent event) {
@@ -81,15 +77,14 @@ public class AppointmentsController implements Initializable {
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
-			//Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
+			// Alerts.showAlert("IO Exception", null, e.getMessage(), AlertType.ERROR);
 			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		
+
 		popTableViewFields(); // Added function to populate tableView on form initialization - worked
 
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
@@ -105,6 +100,5 @@ public class AppointmentsController implements Initializable {
 		obsList = FXCollections.observableArrayList(a2.searchall());
 		tableViewAppointment.setItems(obsList);
 	}
-
 
 }

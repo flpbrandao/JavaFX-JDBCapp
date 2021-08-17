@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -23,7 +24,7 @@
             <Insets left="10.0" top="5.0" />
          </padding>
       </Label>
-      <Label alignment="CENTER" prefHeight="17.0" prefWidth="413.0" text="Select appointment date: ">
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="413.0" text="Select appointment date. Today's appointments will be displayed as default.">
          <VBox.margin>
             <Insets left="10.0" top="5.0" />
          </VBox.margin></Label>
@@ -32,11 +33,20 @@
             <Insets left="140.0" top="10.0" />
          </VBox.margin>
       </TextField>
-      <Button fx:id="btSearch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBtSearchAction" prefHeight="25.0" prefWidth="100.0" text="Search" textFill="#3914cdab">
-         <VBox.margin>
-            <Insets left="165.0" top="10.0" />
-         </VBox.margin>
-      </Button>
+      <HBox prefHeight="45.0" prefWidth="430.0">
+         <children>
+            <Button fx:id="btSearch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBtSearchAction" prefHeight="25.0" prefWidth="100.0" text="Search" textFill="#3914cdab">
+               <HBox.margin>
+                  <Insets left="110.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btUpdate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBtUpdateAction" prefHeight="25.0" prefWidth="100.0" text="Update" textFill="#3914cdab">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <VBox.margin>
             <Insets top="30.0" />

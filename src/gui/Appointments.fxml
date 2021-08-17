@@ -32,8 +32,8 @@
       </ToolBar>
       <TableView fx:id="tableViewAppointment" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="tableColumnDate" prefWidth="220.0" text="Date" />
-          <TableColumn fx:id="tableColumnDescription" prefWidth="162.0" text="Description" />
+          <TableColumn fx:id="tableColumnDate" prefWidth="145.0" text="Date" />
+          <TableColumn fx:id="tableColumnDescription" prefWidth="237.0" text="Description" />
             <TableColumn fx:id="tableColumnPlace" maxWidth="250.0" prefWidth="145.0" text="Place" />
         </columns>
       </TableView>

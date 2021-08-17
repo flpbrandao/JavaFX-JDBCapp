@@ -44,7 +44,7 @@ public class AppointmentFormController implements Initializable {
 	@FXML
 	public void onBtSubmitAction(ActionEvent event) throws ParseException {
 
-		if ((txtDescription.getText() == "") || (txtDate.getText() == "")) {
+		if ((txtDescription.getText() == "") || (txtDate.getText() == "")|| (txtDate.getText() == null) || ((txtDescription.getText() ==null))) {
 			Alerts.showAlert("Required fields missing ", null, "Date and description needs to be filled!",
 					AlertType.WARNING);
 		} else {

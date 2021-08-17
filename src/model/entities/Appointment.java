@@ -1,21 +1,19 @@
 package model.entities;
-
-
 import java.io.Serializable;
 import java.util.Date;
 
-import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 
 
 public class Appointment implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	private Date date;
 	private String Description;
 	private String place;
 	private Integer active;
-	private Button Update;
+	private CheckBox Update;
 
 	public Appointment() {
 
@@ -34,12 +32,13 @@ public class Appointment implements Serializable {
 		this.active = active;
 	}
 	
-	public Appointment(Date date, String description, String place, Integer active, Button button) {
+	public Appointment(Date date, String description, String place, Integer active, CheckBox CheckBox) {
 		this.date = date;
 		Description = description;
 		this.place = place;
 		this.active = active;
-		this.setUpdate(button);
+		this.setUpdate(CheckBox);
+		
 	}
 
 	public Integer getActive() {
@@ -80,13 +79,14 @@ public class Appointment implements Serializable {
 				+ "]";
 	}
 
-	public Button getUpdate() {
+	public CheckBox getUpdate() {
 		return Update;
 	}
 
-	public void setUpdate(Button update) {
+	public void setUpdate(CheckBox update) {
 		Update = update;
 	}
+	
 
 
 

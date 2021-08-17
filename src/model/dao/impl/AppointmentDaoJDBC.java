@@ -1,11 +1,11 @@
 package model.dao.impl;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +15,7 @@ import db.DB;
 import db.DBException;
 import gui.util.Alerts;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import model.entities.Appointment;
 
 public class AppointmentDaoJDBC implements AppointmentDAO {
@@ -71,19 +71,17 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 			while (rs.next()) {
 
 				Date date = (rs.getTimestamp("Date"));
-				String datestring = sdf2.format(date);
-				Date date1 = (sdf2.parse(datestring));
-				
+
 				Integer active = rs.getInt(4);
 				String description = (rs.getString("Description"));
 				String place = (rs.getString("Place"));
-				Button b1 = new Button("Mark as completed");
-				Appointment app = new Appointment(date1, description, place, active, b1);
+				CheckBox b1 = new CheckBox();
+				Appointment app = new Appointment(date, description, place, active, b1);
 				appList.add(app);
 
 			}
 
-		} catch (SQLException | ParseException e) {
+		} catch (SQLException e) {
 			throw new DBException(e.getMessage());
 		}
 
@@ -122,18 +120,18 @@ public class AppointmentDaoJDBC implements AppointmentDAO {
 					d1.setDescription(rs.getString("Description"));
 					d1.setPlace(rs.getString("Place"));
 					d1.setActive(rs.getInt(4));
-					d1.setUpdate(new Button("Mark as completed"));
-					
+					d1.setUpdate(new CheckBox());
+
 					appList.add(d1);
 
 				}
 
 			}
-			if (onInit==false) {
+			if (onInit == false) {
 				Alerts.showAlert("Records found", null, appList.size() + " appointments found on this date.",
 						AlertType.INFORMATION);
 			}
-			
+
 		}
 
 		catch (SQLException e) {
