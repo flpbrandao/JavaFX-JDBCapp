@@ -37,12 +37,7 @@
          <children>
             <Button fx:id="btSearch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBtSearchAction" prefHeight="25.0" prefWidth="100.0" text="Search" textFill="#3914cdab">
                <HBox.margin>
-                  <Insets left="110.0" top="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btUpdate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBtUpdateAction" prefHeight="25.0" prefWidth="100.0" text="Update" textFill="#3914cdab">
-               <HBox.margin>
-                  <Insets left="10.0" top="10.0" />
+                  <Insets left="165.0" top="10.0" />
                </HBox.margin>
             </Button>
          </children>
@@ -54,14 +49,27 @@
          <children>
             <TableView fx:id="tbViewSearchAppointments" layoutY="-8.0" prefHeight="226.0" prefWidth="430.0">
               <columns>
-                <TableColumn fx:id="tableColumnDate" prefWidth="79.0" text="Date" />
-                <TableColumn fx:id="tableColumnDescription" minWidth="0.0" prefWidth="107.0" text="Description" />
-                  <TableColumn fx:id="tableColumnPlace" minWidth="0.0" prefWidth="72.0" text="Place" />
-                  <TableColumn fx:id="tableColumnActive" prefWidth="47.0" text="Active" />
-                  <TableColumn fx:id="tableColumnButton" prefWidth="122.0" text="Update" />
+                <TableColumn fx:id="tableColumnDate" prefWidth="122.0" text="Date" />
+                <TableColumn fx:id="tableColumnDescription" minWidth="0.0" prefWidth="172.0" text="Description" />
+                  <TableColumn fx:id="tableColumnPlace" minWidth="0.0" text="Place" />
+                  <TableColumn fx:id="tableColumnButton" prefWidth="55.0" text="Update" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="btUpdate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBtUpdateAction" prefHeight="25.0" prefWidth="100.0" text="Update" textFill="#3914cdab">
+               <HBox.margin>
+                  <Insets left="82.5" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btComplete" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBtCompleteAction" prefHeight="25.0" prefWidth="140.0" text="Mark as completed" textFill="#3914cdab">
+               <HBox.margin>
+                  <Insets left="35.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </VBox>

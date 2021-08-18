@@ -14,6 +14,7 @@ public class Appointment implements Serializable {
 	private String place;
 	private Integer active;
 	private CheckBox Update;
+	private Integer id;
 
 	public Appointment() {
 
@@ -32,12 +33,13 @@ public class Appointment implements Serializable {
 		this.active = active;
 	}
 	
-	public Appointment(Date date, String description, String place, Integer active, CheckBox CheckBox) {
+	public Appointment(Integer id, Date date, String description, String place, Integer active, CheckBox CheckBox) {
 		this.date = date;
 		Description = description;
 		this.place = place;
 		this.active = active;
 		this.setUpdate(CheckBox);
+		this.id = id;
 		
 	}
 
@@ -75,8 +77,7 @@ public class Appointment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Appointment [date=" + date + ", Description=" + Description + ", place=" + place + ", active=" + active
-				+ "]";
+		return "Appointment [date=" + date + ", Description=" + Description + ", place=" + place + "]";
 	}
 
 	public CheckBox getUpdate() {
@@ -85,6 +86,14 @@ public class Appointment implements Serializable {
 
 	public void setUpdate(CheckBox update) {
 		Update = update;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 

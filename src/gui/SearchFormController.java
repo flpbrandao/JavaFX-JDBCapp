@@ -10,6 +10,7 @@ import gui.util.Alerts;
 import gui.util.Constraints;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -29,7 +30,10 @@ public class SearchFormController implements Initializable {
 
 	@FXML
 	private Button btSearch;
-	
+
+	@FXML
+	private Button btComplete;
+
 	@FXML
 	private Button btUpdate;
 
@@ -47,9 +51,6 @@ public class SearchFormController implements Initializable {
 	private TableColumn<Appointment, String> tableColumnPlace;
 
 	@FXML
-	private TableColumn<Appointment, Integer> tableColumnActive;
-
-	@FXML
 	private TableColumn<Appointment, Button> tableColumnButton;
 
 	@FXML
@@ -60,14 +61,32 @@ public class SearchFormController implements Initializable {
 
 		Boolean onInit = false;
 		popTableView(onInit);
-		
+
 	}
+
 	@FXML
 	private void onBtUpdateAction() {
-
-
-
 		
+
+	}
+
+	@FXML
+	private void onBtCompleteAction(ActionEvent event) {
+		
+		Boolean onInit = true;
+		for (Appointment app : obsList) {
+			if (app.getUpdate().isSelected()) {
+					c1.updateToBD(app);
+			}
+		}
+		Alerts.showAlert("Appointment change", null, "Selected appointments were set as completed.", AlertType.INFORMATION);
+		popTableView(onInit);
+		txtSearch.setText(null);
+	//	AppointmentsController appctrl = new AppointmentsController();
+		
+		
+
+
 	}
 
 	@Override
@@ -83,7 +102,6 @@ public class SearchFormController implements Initializable {
 		tableColumnDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
 		tableColumnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 		tableColumnPlace.setCellValueFactory(new PropertyValueFactory<>("Place"));
-		tableColumnActive.setCellValueFactory(new PropertyValueFactory<>("Active"));
 		tableColumnButton.setCellValueFactory(new PropertyValueFactory<>("Update"));
 
 	}
@@ -109,7 +127,7 @@ public class SearchFormController implements Initializable {
 		}
 		obsList = FXCollections.observableArrayList(c1.searchByDate(a, onInit));
 		tbViewSearchAppointments.setItems(obsList);
-		
+
 	}
 
 	private Date processTodayDate(Date todayDate) throws ParseException {
